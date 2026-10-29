@@ -30,19 +30,15 @@ class Photo
 
   public function setTitle(string $title): void
   {
-      try {
-        $this->validateTitle($title);
-      } catch (\Exception $e) {
-        echo $e->getMessage();
-      }
+      $this->validateTitle($title);
+
+      $this->title = $title;
   }
 
   private function validateTitle(string $title): void
   {
-    if (empty($title)) {
-      throw new \Exception('Title cannot be empty');
-    } else {
-      $this->title = $title;
+    if ($title === '') {
+      throw new \InvalidArgumentException('Title cannot be empty');
     }
   }
 }
