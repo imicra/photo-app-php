@@ -5,12 +5,23 @@ declare(strict_types=1);
 namespace App;
 
 class Photo
-{  
+{
+  private readonly int $id;
+  private string $title;
+  private string $filename;
+
   public function __construct(
-    private int $id, 
-    private string $title, 
-    private string $filename
+    int $id, 
+    string $title, 
+    string $filename
   ) {
+    $this->validateId($id);
+    $this->validateTitle($title);
+    $this->validateFilename($filename);
+
+    $this->id = $id;
+    $this->title = $title;
+    $this->filename = $filename;
   }
 
   public function getId(): int
@@ -37,8 +48,22 @@ class Photo
 
   private function validateTitle(string $title): void
   {
-    if ($title === '') {
+    if (trim($title) === '') {
       throw new \InvalidArgumentException('Title cannot be empty');
+    }
+  }
+
+  private function validateId(int $id): void
+  {
+    if ($id <= 0) {
+      throw new \InvalidArgumentException('Photo ID must be greater than zero');
+    }
+  }
+
+  private function validateFilename(string $filename): void
+  {
+    if (trim($filename) === '') {
+      throw new \InvalidArgumentException('Filename cannot be empty');
     }
   }
 }

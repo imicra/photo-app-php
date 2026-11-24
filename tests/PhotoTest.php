@@ -33,4 +33,46 @@ class PhotoTest extends TestCase
 
     $this->assertSame('Закат', $photo->getTitle());
   }
+
+  public function testCannotCreatePhotoWithEmptyTitle(): void
+  {
+    $this->expectException(\InvalidArgumentException::class);
+
+    $photo = new Photo(1, '', 'photo.jpg');
+  }
+
+  public function testRejectsTitleContainingOnlyWhitespace(): void
+  {
+    $this->expectException(\InvalidArgumentException::class);
+
+    new Photo(1, '   ', 'photo.jpg');
+  }
+
+  public function testCannotCreatePhotoWithZeroId(): void
+  {
+    $this->expectException(\InvalidArgumentException::class);
+
+    new Photo(0, 'Закат', 'photo.jpg');
+  }
+
+  public function testCannotCreatePhotoWithNegativeId(): void
+  {
+    $this->expectException(\InvalidArgumentException::class);
+    
+    new Photo(-5, 'Закат', 'photo.jpg');
+  }
+
+  public function testCannotCreatePhotoWithEmptyFilename(): void
+  {
+    $this->expectException(\InvalidArgumentException::class);
+
+    new Photo(1, 'Закат', '');
+  }
+
+  public function testCannotCreatePhotoWithWhitespaceFilename(): void
+  {
+    $this->expectException(\InvalidArgumentException::class);
+
+    new Photo(1, 'Закат', '    ');
+  }
 }
