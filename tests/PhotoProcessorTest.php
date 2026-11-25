@@ -7,8 +7,6 @@ namespace Tests;
 use App\Photo;
 use App\PhotoProcessingStrategy;
 use App\PhotoProcessor;
-use App\ResizePhotoStrategy;
-use App\WatermarkPhotoStrategy;
 use PHPUnit\Framework\TestCase;
 
 class PhotoProcessorTest extends TestCase

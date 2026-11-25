@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
-interface PhotoRepositoryInterface
+interface PhotoRepositoryInterface extends
+    PhotoReaderInterface,
+    PhotoWriterInterface
 {
-    public function save(Photo $photo): void;
-
-    public function findById(int $id): ?Photo;
-
-    public function delete(int $id): void;
 }
